@@ -11,6 +11,39 @@ function App() {
     {title: "Apel", count: 1},
   ]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!value) {
+      alert("No blank list!");
+      return;
+    }
+
+    const addedTodos = [...todos, {
+      title: value,
+      count: 1
+    }];
+
+    setTodos(addedTodos);
+    setValue("");
+  }
+
+  const handleAdditionCount = (index) => {
+    const newTodos = [...todos];
+    newTodos[index].count = newTodos[index].count + 1;
+    setTodos(newTodos)
+  }
+
+  const handleSubstractionCount = (index) => {
+    const newTodos = [...todos];
+    if (newTodos[index].count > 0) {
+      newTodos[index].count = newTodos[index].count - 1;
+    } else {
+      newTodos.splice(index, 1);
+    }
+    setTodos(newTodos)
+  }
+
   return (
     <>
       <nav className="nav">
@@ -19,7 +52,7 @@ function App() {
       </nav>
 
       <section className="container">
-        <form className="form">
+        <form className="form" onSubmit={handleSubmit}>
           <input
             className="input"
             type="text"
@@ -41,10 +74,10 @@ function App() {
                   <div className="todo-icon-wrapper">
                     <div className="todo-count">{todo.count}</div>
 
-                    <button className="todo-action-button">
+                    <button onClick={() => handleSubstractionCount(index)} className="todo-action-button">
                       <img src={minusIcon} alt="minus icon" />
                     </button>
-                    <button className="todo-action-button">
+                    <button onClick={() => handleAdditionCount(index)} className="todo-action-button">
                       <img src={plusIcon} alt="plus icon" />
                     </button>
                   </div>
