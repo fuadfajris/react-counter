@@ -1,7 +1,8 @@
 import { useState } from "react";
-import shoppingIcon from "./assets/shopping-icon.svg";
 import plusIcon from "./assets/plus-icon.svg"
 import minusIcon from "./assets/minus-icon.svg";
+import Navbar from "./components/Navbar";
+import Container from "./components/Container";
 
 function App() {
   const [value, setValue] = useState("");
@@ -55,12 +56,9 @@ function App() {
 
   return (
     <>
-      <nav className="nav">
-        <img className="nav-icon" src={shoppingIcon} alt="nav-icon" />
-        <h1 className="nav-title"> Shopping</h1>
-      </nav>
+      <Navbar />
 
-      <section className="container">
+      <Container>
         <form className="form" onSubmit={handleSubmit}>
           <input
             className="input"
@@ -109,7 +107,7 @@ function App() {
         ) : (
           <div>List Kosong</div>
         )}
-      </section>
+      </Container>
     </>
   );
 }
